@@ -1,0 +1,23 @@
+{
+    "name": "vb/blog",
+    "description": "my blog",
+    "autoload": {
+        "files" : ["src/helpers.php"],
+        "psr-4": {
+            "App\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "cedric karungu",
+            "email": "ckarungu921@gmail.com"
+        }
+    ],
+    "require": {
+        "altorouter/altorouter": "1.2.0",
+        "symfony/var-dumper": "^4.4",
+        "filp/whoops": "2.3.1",
+        "fzaninotto/faker": "1.8.0",
+        "vlucas/valitron": "1.4.5"
+    }
+}
