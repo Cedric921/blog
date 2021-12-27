@@ -74,4 +74,24 @@ HTML;
         </div>
 HTML;
     }
+    
+    public function select(string $key, string $label, array $options = []){
+        $optionsHtml = [];
+        $value = $this->getValue($key);
+
+        foreach ($options as $k => $v) {
+            $selected = in_array($k, $value) ? "selected" : "";
+
+            $optionsHtml[] = "<option value=\"$k\" $selected>$v</option>";
+        }
+
+        $optionsHtml = implode('', $optionsHtml);
+        return <<<HTML
+        <div class="form-group">
+            <label for="field-{$key}" >{$label}</label>
+            <select   id="field-{$key}" name="{$key}[]" class="{$this->getInputClass($key)} form-control"  required multiple>{$optionsHtml}</select>
+            {$this->getErrorsFeedback($key)}
+        </div>
+HTML;
+    }
 }

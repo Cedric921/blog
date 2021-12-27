@@ -1,14 +1,21 @@
 <?php
 
+use App\Auth;
 use App\HTML\Form;
 use App\Validator;
 use App\Connection;
 use App\Table\PostTable;
+use App\Table\CategoryTable;
 use App\Validators\PostValidator;
 
+Auth::check();
+
 $pdo = Connection::getPDO();
-$postTable = new PostTable($pdo);
-$post = $postTable->find($params['id']);
+$table = new PostTable($pdo);
+$categoryTable = new CategoryTable($pdo);
+$categories = $categoryTable->list();
+$item = $table->find($params['id']);
+$categoryTable->hydratePosts([$item]);
 $success = false;
 
 $errors = [];
@@ -16,12 +23,13 @@ $errors = [];
 if(!empty($_POST)){
 
     Validator::lang('fr');
-    $v = new PostValidator($_POST, $postTable, $post->getID());
-    App\Data::hydrate($post, $_POST, ['name', 'content', 'slug', 'created_at']);
+    $v = new PostValidator($_POST, $table, $item->getID(),$categories);
+    App\Data::hydrate($item, $_POST, ['name', 'content', 'slug', 'created_at']);
 
     if ($v->validate()) {
         # code...
-        $postTable->updatePost($post);
+        $table->updatePost($item, $_POST['categories_ids']);
+        $categoryTable->hydratePosts([$item]);
         $success = true;
     } else{
         $errors = $v->errors() ;
@@ -29,7 +37,7 @@ if(!empty($_POST)){
     //$post->content($_POST['content']);
 }
 
-$form = new Form($post, $errors);
+$form = new Form($item, $errors);
 
 ?>
 
@@ -40,16 +48,7 @@ $form = new Form($post, $errors);
     <div class="alert alert-danger">L'article n'a pas ete modifie</div>
 <?php endif?>
 <div class="container">
-    <h2>Editer l'article <?= $post->getName() ?></h2>
+    <h2>Editer l'article <?= $item->getName() ?></h2>
     
-    <form action="" method="post">
-
-        <?= $form->input('name', 'titre') ?>
-        <?= $form->input('slug', 'url') ?>
-        <?= $form->textarea('content', 'contenu') ?>
-        <?= $form->input('created_at', 'Date de publication') ?>
-
-        
-        <button class="btn btn-primary">Modifier</button>
-    </form>
+    <?php require('_form.php') ?>
 </div>

@@ -53,6 +53,8 @@
             <?php endif ?>
         </div>
     </footer>
+    <script src="/assets/js/jquery.js"></script>
+    <script src="/assets/bootstrap_js/bootstrap.min.js"></script>
     
 </body>
 </html>

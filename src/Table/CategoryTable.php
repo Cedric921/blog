@@ -18,6 +18,7 @@ final class CategoryTable extends Table{
     public function hydratePosts(array $posts) : void{
         $postsById =[];
         foreach ($posts as $post) {
+            $post->setCategories([]);
             $postsById[$post->getID()] = $post;
         }
 
@@ -32,6 +33,15 @@ final class CategoryTable extends Table{
             //tres  incoprehensif ici
             $postsById[$category->getPost_id()]->addCategory($category);
         }
+    }
+
+    public function list(){
+        $categories = $this->all();
+        $results = [];
+        foreach ($categories as $category) {
+            $results[$category->getID()] = $category->getName();
+        }
+        return $results;
     }
 
 }
