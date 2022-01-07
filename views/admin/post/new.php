@@ -31,7 +31,7 @@ if(!empty($_POST)){
 
     if ($v->validate()) {
         # code...
-        $table->createPost($item);
+        $table->createPost($item, $_POST['categories_ids']);
         header('Location: ' . $router->url('admin_posts') .'?created=1');
         exit();
     } else{

@@ -19,8 +19,8 @@ $posts = [];
 $categories = [];
 
 
-for ($i=0; $i < 50; $i++) { 
-   $pdo->exec("INSERT INTO post SET name = '{$faker->sentence()}', slug= '{$faker->slug}', created_at='{$faker->iso8601}', content='{$faker->paragraph(rand(3, 10), true)}'");
+for ($i=0; $i < 80; $i++) { 
+   $pdo->exec("INSERT INTO post SET name = '{$faker->sentence(2)}', slug= '{$faker->slug}', created_at='{$faker->iso8601}', content='{$faker->paragraph(rand(3, 10), true)}'");
    $posts[] = $pdo->lastInsertId();
 }
 for ($i=0; $i < 5; $i++) { 
