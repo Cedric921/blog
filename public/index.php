@@ -49,6 +49,6 @@ $router
    ->match('/api/post/read_all', 'api/post/read', 'api_readAll_post')
    ->match('/api/post/read_one/[i:id]', 'api/post/single_read', 'api_readOne_post')
    ->match('/api/post/create', 'api/post/create', 'api_create_post')
-   ->post('/api/post/update/[i:id]', 'api/post/update', 'api_update_post')
-   ->post('/api/post/delet/[i:id]', 'api/post/delete', 'api_delete_post')
+   ->match('/api/post/update/[i:id]', 'api/post/update', 'api_update_post')
+   ->match('/api/post/delete/[i:id]', 'api/post/delete', 'api_delete_post')
    ->run();
