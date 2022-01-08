@@ -29,9 +29,9 @@ $pdo = Connection::getPDO();
             "created" => $item->getCreatedAt(),
             "categories" => $category
         );
-        $category = [];
-
+        
         echo json_encode($e);
+        $category = [];
     }
       
     else{
