@@ -11,7 +11,7 @@ $pdo = Connection::getPDO();
     $item = new Post();
     $item = $table->find($id);
 
-    if($item->getName() != null){
+    if($item != null){
         $category= [];
 
         foreach ($item->getCategories() as $value) {
@@ -36,6 +36,8 @@ $pdo = Connection::getPDO();
       
     else{
         http_response_code(404);
-        echo json_encode("Employee not found.");
+        echo json_encode([
+            "error" => "Employee not found."
+        ]);
     }
 ?>

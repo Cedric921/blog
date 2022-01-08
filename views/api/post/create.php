@@ -22,8 +22,7 @@
     foreach ($categories as $value) {
         $category = (array) $value;
     }
-
-    
+ 
     
     if($table->createPost($item, $category)){
         echo 'Employee created successfully.';

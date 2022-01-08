@@ -2,10 +2,10 @@
 
     use App\Table\PostTable;
     use  App\Connection;
-
-
+    use App\Model\Post;
 
     $pdo = Connection::getPDO();
+    $posts = new Post();
 
     $table = new PostTable($pdo);
     $posts = $table->all();
@@ -42,15 +42,16 @@
             );
 
             array_push($element["posts"], $e);
-            $category = [];
+            //$category = [];
         }
+        http_response_code(200);
         echo json_encode($element);
     }
 
     else{
         http_response_code(404);
         echo json_encode(
-            array("message" => "No record found.")
+            array("error" => "No record found.")
         );
     }
 ?>
