@@ -47,7 +47,15 @@ class Router{
         $params = $match['params'];
         $router = $this;
         $isAdmin = strpos($view, 'admin/') !== false; 
-        $layout = $isAdmin ? 'admin/layouts/default' : 'layouts/default';
+        $isApi = strpos($view, 'api/') !== false;
+        
+        if($isAdmin){
+            $layout  = 'admin/layouts/default';
+        } elseif($isApi){
+            $layout = 'layouts/api';
+        } else {
+            $layout = 'layouts/default';
+        }
         
         try{
             ob_start();

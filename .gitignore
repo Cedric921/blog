@@ -1,0 +1,2 @@
+#pour ignorer les fichiers des dependances 
+/vendor/*

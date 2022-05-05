@@ -45,4 +45,10 @@ $router
    ->match('/admin/category/[i:id]', 'admin/category/edit' , 'admin_category')
    ->post('/admin/category/[i:id]/delete', 'admin/category/delete' , 'admin_category_delete')
    ->match('/admin/category/new', 'admin/category/new' , 'admin_category_new')
+   //api routes
+   ->match('/api/post/read_all', 'api/post/read', 'api_readAll_post')
+   ->match('/api/post/read_one/[i:id]', 'api/post/single_read', 'api_readOne_post')
+   ->match('/api/post/create', 'api/post/create', 'api_create_post')
+   ->match('/api/post/update/[i:id]', 'api/post/update', 'api_update_post')
+   ->match('/api/post/delete/[i:id]', 'api/post/delete', 'api_delete_post')
    ->run();
